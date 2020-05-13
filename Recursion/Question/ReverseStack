@@ -1,0 +1,37 @@
+package com.company.Recursion;
+
+import java.util.Scanner;
+import java.util.Stack;
+
+public class ReverseStack {
+    static Stack stack=new Stack();
+    private static void insertAtBottom(int x){
+        if(stack.isEmpty())
+            stack.push(x);
+        else {
+            int a=(int)stack.peek();
+            stack.pop();
+            insertAtBottom(x);
+
+            stack.push(a);
+        }
+    }
+    private static void reverse(){
+        if(stack.size()>0) {
+            int x=(int)stack.peek();
+            stack.pop();
+            reverse();
+            insertAtBottom(x);
+        }
+
+    }
+    public static void main(String[] args) {
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        System.out.println(stack);
+        reverse();
+        System.out.println(stack);
+    }
+}
