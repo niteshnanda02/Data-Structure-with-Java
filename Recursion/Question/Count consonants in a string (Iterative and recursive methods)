@@ -1,0 +1,34 @@
+package com.company.Recursion;
+
+import java.util.Scanner;
+
+public class CountConsonant {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        String str = s.nextLine();
+        System.out.println(countItr(str));
+        System.out.println(countRec(str,0));
+    }
+
+    private static int countItr(String str) {
+        int c = 0;
+        for (int j = 0; j < str.length(); j++) {
+            char ch = str.charAt(j);
+            if (ch != 'a' && ch != 'e' && ch != 'i' && ch != 'o' && ch != 'u' && ch != ' ')
+                c++;
+        }
+        return c;
+    }
+
+    private static int countRec(String str,int i){
+        if(i==str.length())
+            return 0;
+        int c = 0;
+        char ch = str.charAt(i);
+        if (ch != 'a' && ch != 'e' && ch != 'i' && ch != 'o' && ch != 'u' && ch != ' ')
+            c++;
+
+        c+=countRec(str,i+1);
+        return c;
+    }
+}
