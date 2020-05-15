@@ -1,0 +1,17 @@
+package com.company.Recursion;
+
+import java.util.Scanner;
+
+public class lengthOfString {
+    public static void main(String[] args) {
+        Scanner s=new Scanner(System.in);
+        String str=s.nextLine();
+        System.out.println(length(str));
+    }
+    private static int length(String str){
+        if(str.length()==0)
+            return 0;
+
+        return 1+length(str.substring(1));
+    }
+}
