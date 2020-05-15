@@ -1,0 +1,31 @@
+package com.company.Recursion;
+
+import java.util.Scanner;
+
+public class UpperCase {
+    public static void main(String[] args) {
+        Scanner s=new Scanner(System.in);
+        String str=s.nextLine();
+        System.out.println(upperCaseLetterItr(str));
+        System.out.println(upperCaseLetterRcr(str,0));
+    }
+    private static char upperCaseLetterRcr(String str,int i){
+        if(i==str.length())
+            return '\0';
+        char ch=str.charAt(i);
+        if(ch>='A'&&ch<='Z')
+            return ch;
+
+        return upperCaseLetterRcr(str,i+1);
+
+    }
+    private static char upperCaseLetterItr(String str){
+
+        for (int i = 0; i <str.length() ; i++) {
+            char ch=str.charAt(i);
+            if(ch>='A'&&ch<='Z')
+                return ch;
+        }
+        return '\0';
+    }
+}
