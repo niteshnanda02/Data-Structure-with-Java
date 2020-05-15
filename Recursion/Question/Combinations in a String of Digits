@@ -1,0 +1,31 @@
+package com.company.Recursion;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class CombinationOfString {
+    public static void main(String[] args) {
+        Scanner s=new Scanner(System.in);
+        String str=s.nextLine();
+        char[] input=str.toCharArray();
+        char[] output=new char[100];
+        printCombination(input,0,output,0);
+    }
+    private static void printCombination(char[] input,int index,char[] output,int outlength){
+
+        //base case
+        if(input.length==index){
+            System.out.println(String.valueOf(output));
+            return;
+        }
+        output[outlength]=input[index];
+        //include space between input string
+        output[outlength+1]=' ';
+
+        printCombination(input,index+1,output,outlength+2);
+
+        //excude space between output string
+        if(input.length!=index+1)
+            printCombination(input,index+1,output,outlength+1);
+    }
+}
