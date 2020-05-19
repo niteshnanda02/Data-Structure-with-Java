@@ -1,0 +1,42 @@
+package com.company.Recursion;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Minnojumptoreachend {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = s.nextInt();
+        }
+        int[] min_jump = new int[n];
+        Arrays.fill(min_jump, Integer.MAX_VALUE);
+        min_jump[0] = 0;
+        int[] jump_path = new int[n];
+
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+
+                if (i <= j + a[j]) {
+                    int old = min_jump[i];
+                    min_jump[i] = Math.min(min_jump[i], min_jump[j] + 1);
+                    if (old != min_jump[i])
+                        jump_path[i] = j;
+                }
+
+            }
+        }
+        System.out.println(min_jump[min_jump.length - 1]);
+        //print path
+        int i=jump_path.length-1;
+        System.out.print(i+" ");
+        while (jump_path[i]!=0){
+
+            System.out.print(jump_path[i]+" ");
+            i=i-jump_path[i];
+        }
+        System.out.print(jump_path[0]);
+    }
+}
