@@ -1,0 +1,25 @@
+package com.company.Recursion;
+
+import java.util.Scanner;
+
+public class ChocWrapPuzzle {
+    public static void main(String[] args) {
+        Scanner s=new Scanner(System.in);
+        int money=s.nextInt(),price=s.nextInt(),wrap=s.nextInt();
+        int c=money/price;
+        puzzle(wrap,c,c);
+    }
+
+    private static void puzzle(int wrap, int remwrap, int c) {
+        if (remwrap==1){
+            System.out.println(c);
+            return;
+        }
+        int val=remwrap/wrap;
+        c+=val;
+        if (remwrap%wrap!=0)
+            val+=remwrap-wrap;
+
+        puzzle(wrap,val,c);
+    }
+}
