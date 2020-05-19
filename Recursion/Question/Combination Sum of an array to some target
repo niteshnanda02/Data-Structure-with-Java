@@ -1,0 +1,51 @@
+package com.company.Recursion;
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class CombinationSum {
+
+
+    public static void main(String[] args) {
+        //code
+        Scanner s=new Scanner(System.in);
+        int t=s.nextInt();
+        while(t-->0){
+            int n=s.nextInt();
+            int[] a=new int[n];
+            for(int i=0;i<n;i++)
+                a[i]=s.nextInt();
+            int target=s.nextInt();
+            ArrayList<ArrayList<Integer>> result=new ArrayList<>();
+            ArrayList<Integer> list=new ArrayList<>();
+            check(a,n,target,0,list,result);
+            System.out.println(result);
+        }
+    }
+    private static void check(int[] a,int n,int target,int startIndex,ArrayList<Integer> list
+            ,ArrayList<ArrayList<Integer>> result ){
+
+        if(target == 0){
+            result.add(new ArrayList<>(list));
+            return;
+        }
+
+
+        for(int i=startIndex;i<n;i++){
+            if(i!=startIndex&&a[i]==a[i-1])
+                continue;
+
+            if(a[i]>target)
+                break;
+
+            list.add(a[i]);
+
+            check(a,n,target-a[i],i+1,list,result);
+
+            list.remove(list.size()-1);
+
+        }
+
+    }
+}
