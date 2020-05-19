@@ -1,0 +1,37 @@
+package com.company.Recursion;
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class NumberOfPaths {
+/*package whatever //do not write package name here */
+
+    public static void main (String[] args) {
+        //code
+        Scanner s=new Scanner(System.in);
+        int t=s.nextInt();
+        while(t-->0){
+            int n=s.nextInt();
+            int m=s.nextInt();
+            System.out.println(countpath(1,1,n,m));
+        }
+    }
+    private static int countpath(int cr,int cc,int er,int ec){
+
+        if(cr>er||cc>ec)
+            return 0;
+
+        if(cr==er&&cc==ec)
+            return 1;
+
+        int count=0;
+
+        count+=countpath(cr+1,cc,er,ec);
+
+        count+=countpath(cr,cc+1,er,ec);
+
+        return count;
+
+    }
+}
