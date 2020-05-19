@@ -1,0 +1,19 @@
+package com.company.Recursion;
+
+public class Palindrome {
+    public static void main(String[] args) {
+        System.out.println(isPalindrome(101));
+    }
+    public static boolean isPalindrome(int x) {
+        String s=String.valueOf(x);
+        return palindrome(s,0,s.length()-1);
+    }
+    private static boolean palindrome(String s,int l,int h){
+        if(l<h){
+            if(s.charAt(l)!=s.charAt(h))
+                return false;
+            palindrome(s,++l,--h);
+        }
+        return false;
+    }
+}
