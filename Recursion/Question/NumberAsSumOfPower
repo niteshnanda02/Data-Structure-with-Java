@@ -1,0 +1,23 @@
+package com.company.Recursion;
+
+import java.util.Scanner;
+
+public class SumOfPower {
+    public static void main(String[] args) {
+        Scanner s=new Scanner(System.in);
+        int x=s.nextInt(),n=s.nextInt();
+        System.out.println(check(x,n,1));
+    }
+
+    private static int check(int x, int n, int i) {
+
+        int val=(int)(x-Math.pow(i,n));
+        if(val==0)
+            return 1;
+        if (val<0)
+            return 0;
+
+        return check(val,n,i+1)+check(x,n,i+1);
+
+    }
+}
