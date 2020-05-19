@@ -1,0 +1,23 @@
+package com.company.Recursion;
+
+import java.util.Scanner;
+
+public class binwithmore1 {
+    public static void main(String[] args) {
+        Scanner s=new Scanner(System.in);
+        int n=s.nextInt();
+        generate("",0,n);
+    }
+
+    private static void generate(String s, int moreone, int n) {
+        if (n==0){
+            System.out.println(s);
+            return;
+        }
+        generate(s+"1",moreone+1,n-1);
+
+        if(moreone>0){
+            generate(s+"0",moreone-1,n-1);
+        }
+    }
+}
