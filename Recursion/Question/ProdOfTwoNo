@@ -1,0 +1,18 @@
+package com.company.Recursion;
+
+
+import java.util.Scanner;
+
+public class Product {
+    public static void main(String[] args) {
+        Scanner s=new Scanner(System.in);
+        int a=s.nextInt(),b=s.nextInt();
+        System.out.println(prod(Math.max(a,b), Math.min(a,b)));
+    }
+
+    private static int prod(int x, int y) {
+        if (y==0)
+            return 0;
+        return x+prod(x,y-1);
+    }
+}
