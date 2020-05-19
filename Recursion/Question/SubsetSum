@@ -1,0 +1,46 @@
+package com.company.Recursion;
+
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class SubsetSums {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int t = s.nextInt();
+        while (t-- > 0) {
+            int n = s.nextInt();
+            int[] a = new int[n];
+            for (int i = 0; i < n; i++) {
+                a[i] = s.nextInt();
+            }
+            ArrayList<Integer> list=subsetsum(a,0, n-1,0);
+            Collections.sort(list);
+            for (int l:list
+                 ) {
+                System.out.print(l+" ");
+
+            }
+            System.out.println();
+        }
+    }
+
+    private static ArrayList<Integer> subsetsum(int[] a, int l, int h, int sum) {
+        if (l>h){
+            ArrayList<Integer> bs=new ArrayList<>();
+            bs.add(sum);
+            return bs;
+        }
+        //include
+        ArrayList<Integer> l1=subsetsum(a,l+1,h,sum+a[l]);
+
+        //exclude
+        ArrayList<Integer> l2=subsetsum(a,l+1,h,sum);
+
+        l1.addAll(l2);
+        return l1;
+    }
+
+
+}
