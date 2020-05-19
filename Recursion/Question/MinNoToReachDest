@@ -1,0 +1,35 @@
+package com.company.Recursion;
+
+import java.util.Scanner;
+
+//-infinity to infinity
+public class MinNotoreachdest {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int t = s.nextInt();
+        while (t-- > 0) {
+            int n = s.nextInt();
+            n= Math.abs(n);
+            System.out.println(minno(0, 0, n));
+        }
+    }
+
+    private static int minno(int source, int step, int dest) {
+
+        if (Math.abs(source) > dest) {
+            return Integer.MAX_VALUE;
+        }
+
+        if (source == dest)
+            return step;
+
+        //positive side
+        int pos = minno(source + step + 1, step + 1, dest);
+
+        //negative side
+        int neg = minno(source - step - 1, step + 1, dest);
+
+        return Math.min(pos, neg);
+
+    }
+}
