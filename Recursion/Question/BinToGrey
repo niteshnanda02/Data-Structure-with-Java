@@ -1,0 +1,25 @@
+package com.company.Recursion;
+
+import java.util.Scanner;
+
+public class BinToGrey {
+    public static void main(String[] args) {
+        Scanner s=new Scanner(System.in);
+        String input = s.nextLine();
+        System.out.println(converttogrey(input,input.charAt(0)+"",1,input.length()));
+    }
+
+    private static String converttogrey(String input, String output, int i, int n) {
+        if(i==n){
+            return output;
+        }
+        output+=xor(input.charAt(i-1),input.charAt(i));
+        return converttogrey(input,output,i+1,n);
+
+
+    }
+
+    private static char xor(char a, char b) {
+        return (a==b)?'0':'1';
+    }
+}
