@@ -1,0 +1,31 @@
+package com.company.Recursion;
+
+import java.util.Scanner;
+
+public class CombinationOffactor {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        factors(n, "", 2, 1);
+    }
+
+    private static void factors(int n, String s, int i, int currsum) {
+        if (i>n||currsum > n)
+            return;
+        if (currsum == n) {
+            System.out.println(s);
+            return;
+        }
+        for (int j = i; j <n ; j++) {
+            if(j*currsum>n)
+                break;
+
+            if(n%j==0){
+                s+=j+" ";
+                factors(n,s,j,currsum*j);
+                s=s.substring(0,s.length()-2);
+            }
+
+        }
+    }
+}
