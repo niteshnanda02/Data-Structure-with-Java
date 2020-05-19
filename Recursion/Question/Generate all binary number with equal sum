@@ -1,0 +1,38 @@
+package com.company.Recursion;
+
+import java.util.Scanner;
+
+public class BinaryNumberWithEqualSum {
+    public static void main(String[] args) {
+        Scanner s=new Scanner(System.in);
+        int n=s.nextInt();
+        equal(n,"","",0);
+    }
+    private static void equal(int n,String left,String right,int di) {
+        //binary string should not start with 0
+        if(n==0){
+            if(di==0){
+                System.out.print(left+right+" ");
+                return;
+            }
+        }
+        if (n==1){
+            if (di==0){
+                System.out.print(left+"0"+right+" ");
+                System.out.print(left+"1"+right+" ");
+            }
+        }
+        if (2 * Math.abs(di) <= n) {
+            if (left != "") {
+
+                equal(n - 2, left + "0", right + "0", di);
+
+                equal(n - 2, left + "0", right + "1", di - 1);
+            }
+            //put first character 1 and right character either as 1 or 0
+            equal(n - 2, left + "1", right + "0", di + 1);
+
+            equal(n - 2, left + "1", right + "1", di);
+        }
+    }
+}
