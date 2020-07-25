@@ -176,7 +176,7 @@ public class linkedList {
     public int mid(){
         Node slow=head;
         Node fast=head;
-        while (slow.next!=null&&fast.next.next!=null){
+        while (fast!=null&&fast.next!=null){
             slow=slow.next;
             fast=fast.next.next;
         }
