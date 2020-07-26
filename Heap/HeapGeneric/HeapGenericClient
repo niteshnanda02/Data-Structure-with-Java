@@ -1,0 +1,38 @@
+package com.company.github;
+
+public class Client {
+    static class car implements Comparable<car> {
+        int x;
+
+        public car(int x) {
+            this.x = x;
+        }
+
+        @Override
+        public String toString() {
+            return "car{" +
+                    "x=" + x +
+                    '}';
+        }
+
+        @Override
+        public int compareTo(car o) {
+            return this.x-o.x;
+        }
+    }
+    public static void main(String[] args) {
+        car[] cars=new car[4];
+        cars[0]=new car(5);
+        cars[1]=new car(3);
+        cars[2]=new car(2);
+        cars[3]=new car(1);
+
+        HeapGeneric<car> heapGeneric=new HeapGeneric<car>();
+        heapGeneric.add(cars[0]);
+        heapGeneric.add(cars[1]);
+        heapGeneric.add(cars[2]);
+        heapGeneric.add(cars[3]);
+        System.out.println(heapGeneric.get());
+        heapGeneric.display();
+    }
+}
