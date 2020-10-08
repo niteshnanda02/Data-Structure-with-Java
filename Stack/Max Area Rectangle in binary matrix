@@ -1,0 +1,97 @@
+class Solution {
+     class p{
+        int v,i;
+        p(int a,int b){
+            v=a;
+            i=b;
+        }
+    }
+    public int maximalRectangle(char[][] matrix) {
+        
+        int m=matrix.length;
+        if(m==0)
+            return 0;
+        int n=matrix[0].length;
+        List<Integer> l=new ArrayList<>();
+        for(int i=0;i<n;i++){
+            l.add(matrix[0][i]-'0');
+        }
+        int max=mah(l,n);
+        
+        for(int i=1;i<m;i++){
+            for(int j=0;j<n;j++){
+                if((matrix[i][j]-'0')==0){
+                    l.set(j,0);
+                }else{
+                    l.set(j,(matrix[i][j]-'0')+l.get(j));
+                }
+            }
+            
+            max=Math.max(max,mah(l,n));
+        }
+        
+        return max;
+    }
+    private int mah(List<Integer> list,int n){
+        if(n==0)
+            return 0;
+        Stack<p> sl=new Stack<>();
+        List<Integer> l=new ArrayList<>();
+        
+        for(int i=0;i<n;i++){
+            if(sl.isEmpty()){
+                l.add(-1);
+            }else if(!sl.isEmpty()&&sl.peek().v<list.get(i)){
+                l.add(sl.peek().i);
+            }else if(!sl.isEmpty()&&sl.peek().v>=list.get(i)){
+                while(!sl.isEmpty()&&sl.peek().v>=list.get(i)){
+                    sl.pop();
+                }
+                if(sl.isEmpty()){
+                    l.add(-1);
+                }else{
+                    l.add(sl.peek().i);
+                }
+                
+            }
+            
+            sl.push(new p(list.get(i),i));
+        }
+        
+        Stack<p> sr=new Stack<>();
+        List<Integer> r=new ArrayList<>();
+        
+        for(int i=n-1;i>=0;i--){
+            if(sr.isEmpty()){
+                r.add(n);
+            }else if(!sr.isEmpty()&&sr.peek().v<list.get(i)){
+                r.add(sr.peek().i);
+            }else if(!sr.isEmpty()&&sr.peek().v>=list.get(i)){
+                while(!sr.isEmpty()&&sr.peek().v>=list.get(i)){
+                    sr.pop();
+                }
+                if(sr.isEmpty()){
+                    r.add(n);
+                }else{
+                    r.add(sr.peek().i);
+                }
+                
+            }
+            
+            sr.push(new p(list.get(i),i));
+        }
+        Collections.reverse(r);
+        List<Integer> width=new ArrayList<>();
+        for(int i=0;i<n;i++){
+            width.add(r.get(i)-l.get(i)-1);
+        }
+        
+        List<Integer> ans=new ArrayList<>();
+        for(int i=0;i<n;i++){
+            ans.add(width.get(i)*list.get(i));
+        }
+        
+        
+        return Collections.max(ans);
+    }
+}
