@@ -1,0 +1,73 @@
+class Solution {
+    static class p{
+        int v,i;
+        p(int v,int i){
+            this.v=v;
+            this.i=i;
+        }
+    }
+    public int largestRectangleArea(int[] heights) {
+        int n=heights.length;
+        if(n==0)
+            return 0;
+        int[] a=new int[n];
+        for(int i=0;i<n;i++){
+            a[i]=heights[i];
+        }
+        Stack<p> stackLeft=new Stack<>();
+	    List<Integer> left=new ArrayList<>();
+	    
+	    for(int i=0;i<n;i++){
+	        if(stackLeft.isEmpty()){
+	            left.add(-1);
+	        }else if(!stackLeft.isEmpty()&&stackLeft.peek().v<a[i]){
+	            left.add(stackLeft.peek().i);
+	        }else if(!stackLeft.isEmpty()&&stackLeft.peek().v>=a[i]){
+	            while(!stackLeft.isEmpty()&&stackLeft.peek().v>=a[i]){
+	                stackLeft.pop();
+	            }
+	            if(stackLeft.isEmpty()){
+	                left.add(-1);
+	            }else{
+	                left.add(stackLeft.peek().i);
+	            }
+	        }
+	        
+	        stackLeft.push(new p(a[i],i));
+	    }
+	    
+	    Stack<p> stackRight=new Stack<>();
+	    List<Integer> right=new ArrayList<>();
+	    
+	    
+	    for(int i=n-1;i>=0;i--){
+	        if(stackRight.isEmpty()){
+	            right.add(n);
+	        }else if(!stackRight.isEmpty()&&stackRight.peek().v<a[i]){
+	            right.add(stackRight.peek().i);
+	        }else if(!stackRight.isEmpty()&&stackRight.peek().v>=a[i]){
+	            while(!stackRight.isEmpty()&&stackRight.peek().v>=a[i]){
+	                stackRight.pop();
+	            }
+	            if(stackRight.isEmpty()){
+	                right.add(n);
+	            }else{
+	                right.add(stackRight.peek().i);
+	            }
+	        }
+	        
+	        stackRight.push(new p(a[i],i));
+	    }
+	    Collections.reverse(right);
+	    //width=right-left-1;
+	    List<Integer> width=new ArrayList<>();
+	    for(int i=0;i<n;i++){
+	        width.add(right.get(i)-left.get(i)-1);
+	    }
+	    List<Integer> res=new ArrayList<>();
+	    for(int i=0;i<n;i++){
+	        res.add(a[i]*width.get(i));
+	    }
+	    return Collections.max(res);
+    }
+}
