@@ -1,0 +1,32 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+	public static void main (String[] args)
+	 {
+	 //code
+	    Scanner s=new Scanner(System.in);
+	    int t=s.nextInt();
+	    PriorityQueue<Integer> q=new PriorityQueue<Integer>();
+	    while(t-->0){
+	        int n=s.nextInt();
+	        int[] a=new int[n];
+	        int k=s.nextInt();
+	        for(int i=0;i<n;i++){
+	            a[i]=s.nextInt();
+	            if(q.size()<=k)
+	                q.add(a[i]);
+	            else{
+	                System.out.print(q.remove()+" ");
+	                q.add(a[i]);
+	            }     
+	           
+	        }
+	        while(!q.isEmpty())
+	            System.out.print(q.remove()+" ");
+	            
+	        System.out.println();
+	    }
+	 }
+}
