@@ -1,0 +1,30 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+	public static void main (String[] args)
+	 {
+	 //code
+	    Scanner s=new Scanner(System.in);
+	    int t=s.nextInt();
+	    PriorityQueue<Integer> minHeap=new PriorityQueue<>();
+	    while(t-->0){
+	        minHeap.clear();
+	        int n=s.nextInt();
+	        for(int i=0;i<n;i++)
+	            minHeap.add(s.nextInt());
+	       long ans=0;     
+	       while(minHeap.size()>=2){
+	            int f=minHeap.remove();
+               
+                int S=minHeap.remove();
+                ans+=f+S;
+                
+                minHeap.add(f+S);
+	       }
+	       
+	       System.out.println(ans);
+	    }
+	 }
+}
