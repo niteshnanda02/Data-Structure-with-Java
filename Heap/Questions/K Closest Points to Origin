@@ -1,0 +1,44 @@
+class Solution {
+    class p implements Comparable<p>{
+        int a,b;
+        int d;
+        p(int a,int b,int d){
+            this.a=a;
+            this.b=b;
+            this.d=d;
+        }
+        
+        @Override
+        public int compareTo(p p){
+            return this.d-p.d;
+        }
+        
+    }
+    public int[][] kClosest(int[][] points, int K) {
+        PriorityQueue<p> maxHeap =new PriorityQueue<>(Collections.reverseOrder());
+        for(int i=0;i<points.length;i++){
+           int d=distance(points[i][0],points[i][1]);
+            p p=new p(points[i][0],points[i][1],d);
+            maxHeap.add(p);
+            if(maxHeap.size()>K)
+                maxHeap.remove();
+        }
+        int[][] ans=new int[K][2];
+        int i=0;
+        while(!maxHeap.isEmpty()){
+            p rp=maxHeap.remove();
+            
+            ans[i][0]=rp.a;
+            ans[i][1]=rp.b;
+            i++;
+        }
+        
+        return ans;
+        
+    }
+    
+    public int distance(int a,int b){
+        
+        return (int) (Math.pow(a,2)+Math.pow(b,2));
+    }
+}
