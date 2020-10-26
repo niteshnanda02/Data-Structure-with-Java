@@ -1,0 +1,35 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+	 public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt();
+        PriorityQueue<Integer> maxLeft = new PriorityQueue<>(Collections.reverseOrder());
+        PriorityQueue<Integer> minRight = new PriorityQueue<>();
+        int median = 0;
+        for (int i = 0; i < n; i++) {
+            int val = s.nextInt();
+            if(maxLeft.isEmpty()||maxLeft.peek()>val)
+                maxLeft.add(val);
+            else
+                minRight.add(val);
+                
+            //maintaine the size of heap
+            if(maxLeft.size()>minRight.size()+1)
+                minRight.add(maxLeft.remove());
+            else if(minRight.size()>maxLeft.size()+1)
+                maxLeft.add(minRight.remove());
+                
+            if(maxLeft.size()>minRight.size())
+                median=maxLeft.peek();
+            else if(maxLeft.size()<minRight.size())
+                median=minRight.peek();
+            else
+                median=(maxLeft.peek()+minRight.peek())/2;
+                 
+            System.out.println(median);
+        }
+    }
+}
