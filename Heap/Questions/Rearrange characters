@@ -1,0 +1,61 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+    static class pair implements Comparable<pair>{
+        char c;
+        int f;
+        pair(char a,int b){
+            c=a;
+            f=b;
+        }
+        
+        @Override
+        public int compareTo(pair p){
+            return this.f-p.f;
+        }
+        
+    }
+	public static void main (String[] args)
+	 {
+	 //code
+	    Scanner s=new Scanner(System.in);
+	    int t=s.nextInt();
+	    HashMap<Character,Integer> map=new HashMap<>();
+	    PriorityQueue<pair> maxHeap=new PriorityQueue<>(Collections.reverseOrder());
+	    while(t-->0){
+	        map.clear();
+	        maxHeap.clear();
+	        String str=s.next();
+	        int n=str.length();
+	        for(int i=0;i<n;i++){
+	            char ch=str.charAt(i);
+	            map.put(ch,map.getOrDefault(ch,0)+1);
+	        }
+	        Set<Map.Entry<Character,Integer>> entries=map.entrySet();
+	        for(Map.Entry<Character,Integer> entry:entries){
+	            maxHeap.add(new pair(entry.getKey(),entry.getValue()));
+	        }
+	        String ans="";
+	        pair prev=new pair('#',-1);
+	        while(!maxHeap.isEmpty()){
+	           
+	            pair first=maxHeap.remove();
+	            ans+=first.c;
+	            
+	            if(prev.f>0){
+	                maxHeap.add(prev);
+	            }
+	            first.f-=1;
+	            prev=first;
+	       	  }
+	        
+	        if(n==ans.length())
+	            System.out.println(1);
+	        else 
+	            System.out.println(0);
+	            
+	    }
+	 }
+}
