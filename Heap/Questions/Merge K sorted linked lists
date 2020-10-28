@@ -1,0 +1,33 @@
+class Merge
+{
+    Node mergeKList(Node[]a,int N)
+    {
+        //Add your code here.
+        PriorityQueue<Node> minHeap=new PriorityQueue<>(new Comparator<>(){
+            
+            public int compare(Node n1,Node n2){
+                return n1.data-n2.data;
+            }
+        });
+        
+        for(int i=0;i<N;i++){
+            minHeap.add(a[i]);
+        }
+        Node head=null,tail=null;
+        while(!minHeap.isEmpty()){
+            Node top=minHeap.remove();
+            
+            if(top.next!=null)
+                minHeap.add(top.next);
+                
+            if(head==null){
+                head=top;
+                tail=top;
+            }else{
+                tail.next=top;
+                tail=top;
+            }
+        }
+        return head;
+    }
+}
