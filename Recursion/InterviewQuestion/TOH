@@ -1,0 +1,24 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+	public static void main (String[] args)
+	 {
+	 //code
+	    Scanner s=new Scanner(System.in);
+	    int t=s.nextInt();
+	    while(t-->0){
+	        int n=s.nextInt();
+	        solve(n,1,2,3);
+	    }
+	 }
+	 private static void solve(int n,int s,int h,int d){
+	     if(n==0)
+	        return;
+	     
+	     solve(n-1,s,d,h);a
+	     System.out.println("move disk "+n+" from rod "+s+" to rod "+d);
+	     solve(n-1,h,s,d);
+	 }
+}
