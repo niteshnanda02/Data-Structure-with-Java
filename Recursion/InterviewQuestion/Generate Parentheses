@@ -1,0 +1,27 @@
+class Solution {
+    static List<String> l=new ArrayList<>();
+
+    public List<String> generateParenthesis(int n) {
+        l.clear();
+        int open=n;
+        int close=n;
+                
+        solve(open,close,"");
+        
+        return l;
+    }
+    private void solve(int open,int close,String op){
+        
+        if(open==0&&close==0){
+            l.add(op);
+            return;
+        }
+        
+        if(open!=0){
+            solve(open-1,close,op+"(");
+        }
+        if(open<close){
+            solve(open,close-1,op+")");
+        }
+    }
+}
