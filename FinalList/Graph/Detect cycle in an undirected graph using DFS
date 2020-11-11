@@ -1,0 +1,33 @@
+class DetectCycle
+{   static int[] vis;
+    static boolean isCyclic(ArrayList<ArrayList<Integer>> g, int V)
+    {
+       // add your code here
+        vis=new int[V];
+        
+        boolean temp=false;
+        
+        for(int i=0;i<V;i++){
+            if(vis[i]==0){
+                temp=isCyclic(g,0,-1);
+                if(temp==true)
+                    break;
+            }
+        }
+        
+        return temp;
+    }
+    static boolean isCyclic(ArrayList<ArrayList<Integer>> g, int curr,int par){
+        vis[curr]=1;
+        for(int child:g.get(curr)){
+            if(vis[child]==0){
+                if(isCyclic(g,child,curr))
+                    return true;
+            }
+            else if(child!=par)
+                return true;
+        }
+        return false;
+    }
+    
+}
