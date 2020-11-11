@@ -1,0 +1,24 @@
+class Traversal
+{
+    static int[] visited;
+    static ArrayList<Integer> l=new ArrayList<>();
+    static ArrayList<Integer> dfs(ArrayList<ArrayList<Integer>> g, int N)
+    {
+       // add your code here
+       visited=new int[N+1];
+       l.clear();
+       Dfs(g,0);
+       
+       return l;
+    }
+    static void Dfs(ArrayList<ArrayList<Integer>> g,int node){
+    
+        visited[node]=1;
+        l.add(node);
+        for(int child:g.get(node)){
+            if(visited[child]==0)
+                Dfs(g,child);
+        }
+    }
+}
+
