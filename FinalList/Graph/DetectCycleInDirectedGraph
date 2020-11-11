@@ -1,0 +1,34 @@
+class DetectCycle
+{
+    static int[] visited;
+    static boolean isCyclic(ArrayList<ArrayList<Integer>> adj, int V)
+    {
+        // add your code here
+        visited=new int[V+1];
+        boolean temp=false;
+        for(int i=0;i<V;i++){
+            visited[i]=1;
+            for(int child:adj.get(i)){
+                temp=cycle(adj,child);
+                if(temp)
+                    return temp;
+            }
+            visited[i]=0;
+        }
+        return temp;
+    }
+    static boolean cycle(ArrayList<ArrayList<Integer>> adj, int node){
+        if(visited[node]==1)
+            return true;
+        
+        visited[node]=1;
+        boolean temp=false;
+        for(int child:adj.get(node)){
+            temp=cycle(adj,child);
+            if(temp)
+                return temp;
+        }
+        visited[node]=0;
+        return temp;
+    }
+}
