@@ -1,0 +1,38 @@
+class TopologicalSort {
+    static int[] in,res;
+    static int[] topoSort(ArrayList<ArrayList<Integer>> adj, int N) {
+        // add your code here
+        in=new int[N];
+        res=new int[N];
+        
+        for(ArrayList<Integer> l:adj){
+            for(int i:l){
+                in[i]++;
+            }
+        }
+        Queue<Integer> queue=new LinkedList<>();
+        for(int i=0;i<N;i++){
+            if(in[i]==0)
+                queue.add(i);
+        }
+        
+        int index=0;
+        while(!queue.isEmpty()){
+        
+            int rv=queue.poll();
+            res[index]=rv;
+            index++;
+            
+            for(int child:adj.get(rv)){
+                in[child]--;
+                if(in[child]==0)
+                    queue.add(child);
+            }
+            
+        }
+        
+        
+        
+        return res;
+    }
+}
