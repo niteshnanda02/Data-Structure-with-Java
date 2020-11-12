@@ -1,0 +1,34 @@
+class Islands {
+
+    // Function to find the number of island in the given list A
+    // N, M: size of list row and column respectively
+    static int[] x={0,1,1,1,0,-1,-1,-1};
+    static int[] y={1,1,0,-1,-1,-1,0,1};
+    static int findIslands(ArrayList<ArrayList<Integer>> A, int N, int M) {
+
+        // Your code here
+        int numOfIsland=0;
+        
+        for(int i=0;i<N;i++){
+            for(int j=0;j<M;j++){
+                int child=A.get(i).get(j);
+                if(child==1){
+                    numOfIsland++;
+                    dfs(A,i,j,N,M);
+                }
+            }
+        }
+        return numOfIsland;
+    }
+    static void dfs(ArrayList<ArrayList<Integer>> A,int i,int j,int n,int m){
+        
+        if(i<0||i>=n||j<0||j>=m||A.get(i).get(j)!=1)
+            return;
+        
+        A.get(i).set(j,2);
+        
+        for(int k=0;k<8;k++){
+            dfs(A,i+x[k],j+y[k],n,m);
+        }
+    }
+}
