@@ -1,0 +1,24 @@
+class solve{
+    static int minJumps(int[] arr){
+        // your code here
+        int n=arr.length;
+        if(arr[0]==0)
+            return -1;
+        int[] minJump=new int[n];
+        Arrays.fill(minJump,Integer.MAX_VALUE);
+        minJump[0]=0;
+        for(int i=1;i<n;i++){
+        
+            for(int j=0;j<i;j++){
+                if(i<=j+arr[j]){
+                    minJump[i]=Math.min(minJump[i],minJump[j]+1);
+                }
+            }
+        }
+        for(int i=0;i<n;i++){
+            if(minJump[i]==Integer.MAX_VALUE)
+                return -1;
+        }
+        return minJump[n-1];
+    }
+}
