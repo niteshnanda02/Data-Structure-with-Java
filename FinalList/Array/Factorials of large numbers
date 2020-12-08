@@ -1,0 +1,19 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+import java.math.*;
+
+class GFG {
+	public static void main (String[] args) {
+		//code
+		Scanner s=new Scanner(System.in);
+		int t=s.nextInt();
+		while(t-->0){
+		    int n=s.nextInt();
+		    BigInteger b=BigInteger.valueOf(1);
+		    for(int i=n;i>0;i--)
+		        b=b.multiply(BigInteger.valueOf(i));
+		    System.out.println(b);      
+		}
+	}
+}
