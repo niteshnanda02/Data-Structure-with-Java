@@ -1,0 +1,15 @@
+static boolean findsum(int arr[],int n)
+{
+    //Your code here
+    Set<Integer> set=new HashSet<>();
+    int prev=0;
+    set.add(0);
+    for(int i=0;i<n;i++){
+        int elem=arr[i];
+        prev+=elem;
+        if(set.contains(prev))
+            return true;
+        set.add(prev);
+    }
+    return false;
+}
