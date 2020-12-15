@@ -1,0 +1,46 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+    static int minSwap(int[] a,int n,int k){
+        int cnt=0;
+        for(int i=0;i<n;i++){
+            if(a[i]<=k)
+                cnt++;
+        }
+        int bad=0;
+        for(int i=0;i<cnt;i++){
+            if(a[i]>k)
+                bad++;
+        }
+        int ans=bad;
+        for(int i=0,j=cnt;j<n;i++,j++){
+        
+            if(a[i]>k)
+                bad--;
+            
+            if(a[j]>k)
+                bad++;
+            ans=Math.min(ans,bad);
+        }
+        
+        return ans;
+    }
+	public static void main (String[] args)
+	 {
+	 //code
+	    Scanner s=new Scanner(System.in);
+	    
+	    int t=s.nextInt();
+	    while(t-->0){
+	        
+	        int n=s.nextInt();
+	        int[] a=new int[n];
+	        for(int i=0;i<n;i++)
+	            a[i]=s.nextInt();
+	        int k=s.nextInt();
+	        System.out.println(minSwap(a,n,k));
+	    }
+	 }
+}
