@@ -1,0 +1,33 @@
+class Solution {
+    public void nextPermutation(int[] nums) {
+        if(nums==null||nums.length<=1)
+            return;
+        //1. find a[ind1]<a[ind1+1]
+        //2. find from back a[ind2]>a[ind1]
+        //3. swap(a[ind1],a[ind2])
+        //4. reverse(a,ind+1,last)
+        
+        int ind1=nums.length-2;
+        while(ind1>=0&&nums[ind1]>=nums[ind1+1]) ind1--;
+        if(ind1>=0){
+            int ind2=nums.length-1;
+            while(ind2>=0&&nums[ind2]<=nums[ind1]) ind2--;
+            
+            swap(nums,ind1,ind2);
+            
+        }
+        reverse(nums,ind1+1,nums.length-1);
+    }
+    void swap(int[] a,int i,int j){
+        a[i]=a[i]+a[j];
+        a[j]=a[i]-a[j];
+        a[i]=a[i]-a[j];
+    }
+    void reverse(int[] a,int l,int h){
+        while(l<h){
+            swap(a,l,h);
+            l++;
+            h--;
+        }
+    }
+}
