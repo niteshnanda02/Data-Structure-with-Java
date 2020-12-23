@@ -19,12 +19,14 @@ class Sol
             return map.get(A);
         int flag=0;
         for(int k=1;k<=A.length()-1;k++){
-            int case1=word(A.substring(0,k),B);
-            int case2=word(A.substring(k,A.length()),B);
-            
-            if(case1==1&&case2==1){
-                flag=1;
-                break;
+            String first=A.substring(0,k);
+            if(B.contains(first)){
+                
+                if(word(A.substring(k,A.length()),B)==1){
+                    flag=1;
+                    break;
+                }
+                
             }
         }
         map.put(A,flag);
