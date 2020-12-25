@@ -1,0 +1,33 @@
+class GfG
+{
+    static int[][] dp;
+    int countPS(String str)
+    {
+        // Your code here
+        
+        int n=str.length();
+        dp=new int[n+1][n+1];
+        for(int[] a:dp)
+            Arrays.fill(a,-1);
+        return solve(str,0,n-1);
+    }
+    
+    int solve(String s,int i,int j){
+        if(i>j)
+            return 0;
+        if(i==j)
+            return 1;
+        if(dp[i][j]!=-1)
+            return dp[i][j];
+        //if character are same then increment 1 and 
+        //if it is substring then do this solve for solve(i+1,j-1)
+        //else then do solve(i+1,j)+solve(i,j-1)
+        if(s.charAt(i)==s.charAt(j)){
+            return dp[i][j]=1+solve(s,i+1,j)+solve(s,i,j-1);
+        }else{
+            //else solve for solve(i+1) and solve(j-1)
+            // and reduce solve(i+1,j-1) because they are counted twice
+            return dp[i][j]=solve(s,i+1,j)+solve(s,i,j-1)-solve(s,i+1,j-1);
+        }
+    }
+}
