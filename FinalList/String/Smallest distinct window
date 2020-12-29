@@ -1,0 +1,44 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+	public static void main (String[] args)
+	 {
+	 //code
+	    Scanner s=new Scanner(System.in);
+	    int t=s.nextInt();
+	    Set<Character> set=new HashSet<>();
+	    while(t-->0){
+	        set.clear();
+	        String str=s.next();
+	        for(char x:str.toCharArray())
+	            set.add(x);
+	        
+	        int size=set.size();
+	        int n=str.length();
+	        int minLen=Integer.MAX_VALUE,start=0,count=0;
+	        int[] cnt=new int[256];
+	        for(int i=0;i<n;i++){
+	            char ch=str.charAt(i);
+	            cnt[ch]++;
+	            if(cnt[ch]==1)
+	                count++;
+	            
+	            if(count==size){
+	                
+	                //remove occurence of same element from starrt
+	                while(cnt[str.charAt(start)]>1){
+	                    cnt[str.charAt(start)]--;
+	                    start++;
+	                }
+	                
+	                int len=i-start+1;
+	                if(minLen>len)
+	                    minLen=len;
+	            }
+	        }
+	        System.out.println(minLen);
+	    }
+	 }
+}
