@@ -1,0 +1,39 @@
+class LinkedList
+{
+    static Node mergeSort(Node head)
+    {
+        // add your code here
+        if(head==null||head.next==null)
+            return head;
+        Node middle=getMiddle(head);
+        Node nextToMiddle=middle.next;
+        if(middle!=null)
+            middle.next=null;
+        
+        Node first=mergeSort(head);
+        Node second=mergeSort(nextToMiddle);
+        
+        return merge(first,second);
+    }
+    static Node merge(Node first,Node second){
+        if(first==null)
+            return second;
+        if(second==null)
+            return first;
+        if(first.data<=second.data){
+            first.next=merge(first.next,second);
+            return first;
+        }else{
+            second.next=merge(first,second.next);
+            return second;
+        }
+    }
+    static Node getMiddle(Node node){
+        Node slow=node,fast=node;
+        while(fast!=null&&fast.next!=null&&fast.next.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow;
+    }
+}
