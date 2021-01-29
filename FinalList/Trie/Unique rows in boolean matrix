@@ -1,0 +1,61 @@
+class GfG
+{
+    static class Trie{
+        class Node{
+            int data;
+            Map<Integer,Node> children;
+            boolean isTerminal;
+
+            Node(int d,boolean b){
+                data=d;
+                children=new HashMap<>();
+                isTerminal=b;
+            }
+        }
+        private Node root;
+
+        Trie(){
+            root=new Node(2,false);
+        }
+        public boolean add(int[] a,int i,int n){
+            return add(this.root,a,i,n);
+        }
+        private boolean add(Node parent,int[] a,int i,int n){
+            if(i==n){
+                if(parent.isTerminal){
+                    return false;
+                }else{
+                    parent.isTerminal=true;
+                    return true;
+                }
+            }
+            int cc=a[i];
+            Node child=parent.children.get(cc);
+            if(child==null){
+                child=new Node(cc,false);
+                parent.children.put(cc,child);
+            }
+
+            return add(child,a,i+1,n);
+        }
+            
+        
+    }
+    public static ArrayList<ArrayList<Integer>> uniqueRow(int a[][],int r, int c)
+    {
+        //add code here.
+        Trie trie =new Trie();
+        ArrayList<ArrayList<Integer>> list=new ArrayList<>();
+    
+        for(int i=0;i<r;i++){
+            if(trie.add(a[i],0,c)){
+                ArrayList<Integer> subList=new ArrayList<>();
+                for(int j=0;j<c;j++)
+                    subList.add(a[i][j]);
+                list.add(subList);
+            }
+        }
+        
+        return list;
+    }
+}
