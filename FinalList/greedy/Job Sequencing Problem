@@ -1,0 +1,32 @@
+class solve{
+    // return an array of size 2 having the 0th element equal to the count
+    // and 1st element equal to the maximum profit
+    int[] JobScheduling(Job arr[], int n){
+        // Your code here
+        Arrays.sort(arr,new Comparator<>(){
+           @Override
+           public int compare(Job j1,Job j2){
+               return j2.profit-j1.profit;
+           }
+        });
+        int maxDeadline=0;
+        for(int i=0;i<n;i++){
+            maxDeadline=Math.max(maxDeadline,arr[i].deadline);
+        }
+        
+        TreeSet<Integer> set=new TreeSet<>();
+        for(int i=1;i<=maxDeadline;i++){
+            set.add(i);
+        }
+        int[] ans=new int[2];
+        for(int i=0;i<n;i++){
+            Integer j= set.floor(arr[i].deadline);
+            if(j!=null){
+                ans[0]+=1;
+                ans[1]+=arr[i].profit;
+                set.remove(j);
+            }
+        }
+        return ans;
+    }
+}
