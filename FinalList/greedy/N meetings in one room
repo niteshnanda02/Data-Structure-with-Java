@@ -1,0 +1,29 @@
+class Meeting {
+    static class Activity implements Comparable<Activity>{
+        int s,e;
+        Activity(int a,int b){
+            s=a;
+            e=b;
+        }
+        @Override
+        public int compareTo(Activity a){
+            return this.e-a.e;
+        }
+    }
+    public static int maxMeetings(int start[], int end[], int n) {
+        // add your code here
+        Activity[] activities=new Activity[n];
+        for(int i=0;i<n;i++){
+            activities[i]=new Activity(start[i],end[i]);
+        }
+        Arrays.sort(activities);
+        int c=1,i=0;
+        for(int j=1;j<n;j++){
+            if(activities[i].e<activities[j].s){
+                c++;
+                i=j;
+            }
+        }
+        return c;
+    }
+}
