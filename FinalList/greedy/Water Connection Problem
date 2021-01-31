@@ -1,0 +1,74 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+     //store the starting end of pipe
+    static int[] start=new int[1102];
+    //store the ending vertex of pipe
+    static int[] end=new int[1102];
+    static int[] di=new int[1102]; 
+    static List<Integer> a,b,d;
+    static int ans=Integer.MAX_VALUE;
+	public static void main (String[] args)
+	 {
+	 //code
+	    Scanner s=new Scanner(System.in);
+	    int t=s.nextInt();
+	    while(t-->0){
+    	    int n=s.nextInt(),p=s.nextInt();
+    	    int[][] arr=new int[p][3];
+    	    for(int i=0;i<p;i++){
+    	        arr[i][0]=s.nextInt();
+    	        arr[i][1]=s.nextInt();
+    	        arr[i][2]=s.nextInt();
+    	    }
+    	    
+    	    solve(arr,p,n);
+	    }
+	 }
+	 
+	 static void solve(int[][] arr,int p,int n){
+	    for(int i=0;i<21;i++){
+	        start[i]=end[i]=di[i]=0;
+	    }     
+	    a=new ArrayList<>();b=new ArrayList<>();d=new ArrayList<>();
+	    
+	    for(int i=0;i<p;i++){
+	        int first=arr[i][0],second=arr[i][1],diam=arr[i][2];
+	        
+	        start[first]=second;
+	        end[second]=first;
+	        di[first]=diam;
+	    }
+	    for(int i=1;i<=n;i++){
+	        
+	        /*If a pipe has no ending vertex
+	         but has starting vertex i.e outgoing pipe
+	        */
+	        if(end[i]==0&&start[i]>0){
+    	        ans=Integer.MAX_VALUE;
+    	        int w=dfs(i); 
+    	        
+    	        a.add(i);
+    	        b.add(w);
+    	        d.add(ans);
+	        }
+	        
+	       
+	    }
+	    System.out.println(a.size());
+	    for(int i=0;i<a.size();i++){
+	        System.out.println(a.get(i)+" "+b.get(i)+" "+d.get(i));
+	    }
+	    
+	 }
+	 
+	 static int dfs(int v){
+	     if(start[v]==0)
+	        return v;
+	     if(ans>di[v])
+	        ans=di[v];
+	     return dfs(start[v]);
+	 }
+}
