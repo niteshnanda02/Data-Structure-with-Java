@@ -1,0 +1,45 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+	public static void main (String[] args)
+	 {
+	 //code
+	    Scanner s=new Scanner(System.in);
+	    int t=s.nextInt();
+	    Map<Integer,Integer> map=new HashMap<>();
+	    LinkedList<Integer> queue=new LinkedList<>();
+	    while(t-->0){
+	        map.clear();
+	        queue.clear();
+	        int n=s.nextInt();
+	        int[] a=new int[n];
+	        for(int i=0;i<n;i++)
+	            a[i]=s.nextInt();
+	        
+	        int cap=s.nextInt();
+	        int fault=0;
+	        for(int i=0;i<n;i++){
+	            if(map.containsKey(a[i])){
+	                queue.remove((Integer)a[i]);
+	                queue.addLast(a[i]);
+	                continue;
+	            }
+	                
+	                
+	            if(queue.size()==cap){
+	                int rv=queue.removeFirst();
+	                map.remove(rv);
+	                
+	            }
+                queue.addLast(a[i]);
+                map.put(a[i],1);
+                
+                fault++;
+	        }
+	        System.out.println(fault);
+	        
+	    }
+	 }
+}
