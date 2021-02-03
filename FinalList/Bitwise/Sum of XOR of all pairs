@@ -1,0 +1,24 @@
+class Solution{
+   
+    // Function for finding maximum and value pair
+    public long sumXOR (int arr[], int n) {
+        //Complete the function
+        long res=0;
+        
+        for(int i=0;i<32;i++){
+            int cntZ=0,cntO=0;
+            for(int j=0;j<n;j++){
+                if((arr[j]&(1<<i))==0)
+                    cntZ++;
+                else
+                    cntO++;
+            }
+            long p=cntO*cntZ;
+            
+            res+=p*(1<<i);
+        }
+        return res;
+    }
+    
+    
+}
